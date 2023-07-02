@@ -1,3 +1,4 @@
+  /* headerのスタイル */
 .header {
   width: 100%;
   height: 100px;
@@ -7,12 +8,14 @@
   align-items: center;
 }
 
+  /* リンクのスタイル */
 .anchor {
   display: inline-block;
   padding: 8px 24px;
   font-size: 1.2rem;
 }
 
+  /* リンクホバー時などのスタイル */
 .anchor:hover,
 .anchor:focus,
 .anchor:active {

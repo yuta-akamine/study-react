@@ -3,8 +3,11 @@ import classes from './Header.module.css'
 
 export function Header() {
   return (
+    // module.css適用
     <header className={classes.header}>
+      {/* linkコンポーネント適用 */}
       <Link href="/">
+        {/* スタイル適用 */}
         <p className={classes.anchor}>
           Index
         </p>
