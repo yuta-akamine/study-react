@@ -5,30 +5,39 @@ import { Header } from '@/components/Header'
 import Link from 'next/link'
 
 // ReactからuseCallback、useEffectをインポートしている
-import { useCallback, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 // import { Header } from '@/src/components/Header'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const foo = 1;
 
-  // 無名関数は使えないので関数名をつける
-  const handleClick = useCallback((e) => { // 第一引数eにはクリックした際のイベントが入っている
-    // イベントのtargetプロパティはDOMになったaタグを値に持つ
-    console.log(e.target.href); // aタグをクリックするとDOM aのhref属性の値(url)がコンソールに出力される
-    e.preventDefault(); //画面遷移を無効にしている。
-    alert(foo);
-  }, []);
+  //useStateは配列を返している。配列の分割代入 引数はcountの初期値
+	const [count, setCount] = useState(1);
+  // let count = 1;
 
+	// 上の記述と同じ意味
+	// const array = useState(1); useStateの要素番号0の値である1を引数で指定して代入
+	// const count = array[0]
+	// const setCount = array[1]
+
+  // ボタンクリック時の処理。無名関数は使えないので関数名をつける
+  const handleClick = (e) => { // 第一引数eにはクリックした際のイベントが入っている
+    // setCountの引数にアロー関数を利用し、現在のcountを引数で受け取りcount+1して代入しcountを返す
+    setCount(count => count + 1);
+    setCount(count => count + 1);
+    // // 上記は下記を省略した記述。
+    // setCount(function(count) {
+    //   return count + 1;
+    // });
+  };
+  
   // useEffectを利用してアロー関数を定義
   useEffect(() => { // このファイルHomeコンポーネントがマウント(レンダリングされる瞬間)時の処理。
-    console.log("マウント時");
     document.body.style.backgroundColor = "lightblue"; //背景色をlightblueにする
-
+    
     //useEffectにreturnを記述することでアンマウント時の処理を記述できる。
     return () => { // アンマウント時の処理。Cleanup Functionともいう
-      console.log("アンマウント時");
       document.body.style.backgroundColor = ""; //デフォルトの背景色にする
     };
   }, []);
@@ -36,13 +45,13 @@ export default function Home() {
   return (
     <div>
       <Header />
-      
-      <Link
+      <h1>{count}</h1>
+      <button
         href="/about"
         onClick={handleClick}
       >
         ボタン
-      </Link>
+      </button>
 
       {/* propsでpageを渡している */}
       <Main page="index" />
