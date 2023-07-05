@@ -60,6 +60,7 @@ export default function Home() {
 
     // inputテキスト入力時の処理
     // useCallbackを利用しレンダリングされないよう制御中
+    // TypeScriptでエラーが出る。Type error: Parameter 'e' implicitly has an 'any' type.
     const handleChange = useCallback((e) => { //引数eはイベントを受け取っている
       // 文字列制御の場合。textの長さが5より大きいならsetText実行せずにonChangeの処理終了
       if (e.target.value.length > 5){
